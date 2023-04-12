@@ -1,4 +1,4 @@
-package apiMethods;
+package api_methods;
 
 import io.qameta.allure.Step;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;

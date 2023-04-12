@@ -1,4 +1,5 @@
-package pageObjects;
+package page_objects;
+
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -14,6 +15,7 @@ public class SignUpPage {
     private SelenideElement passwordField = $(byXpath("//input[@name='Пароль']"));
     private SelenideElement signUpButton = $(byXpath("//button[text()='Зарегистрироваться']"));
     private SelenideElement errorPassword = $(byXpath("//p[text()='Некорректный пароль']"));
+    public SelenideElement loginButton = errorPassword = $(byLinkText("Войти"));
 
     @Step("Enter user data")
     public void enterUserData(String name, String email, String password) {
@@ -24,19 +26,18 @@ public class SignUpPage {
     }
 
     @Step("Positive sign up")
-    public void createUser(String name, String email, String password) {
+    public void checkUserCreation(String name, String email, String password) {
         enterUserData(name, email, password);
         signUpButton.shouldBe(visible).click();
+        // Проверка, что кнопки Зарегистрироваться нет
         signUpButton.shouldBe(Condition.disappear);
     }
 
     @Step("Error sign up")
-    public void createUserWithIncorrectPassword(String name, String email, String password){
+    public void checkUserCreationWithIncorrectPassword(String name, String email, String password) {
         enterUserData(name, email, password);
         signUpButton.shouldBe(visible).click();
         errorPassword.shouldBe(visible);
         signUpButton.shouldBe(visible);
     }
-
-
 }

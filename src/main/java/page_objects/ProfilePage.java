@@ -1,4 +1,4 @@
-package pageObjects;
+package page_objects;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
@@ -21,14 +21,16 @@ public class ProfilePage {
     @Step("Transition to profile page")
     public void openProfileWithAuth() {
         profile.shouldBe(Condition.visible).click();
+        // Проверка, что Профиль, поле Имя и Логина отображаются
         profileButton.shouldBe(Condition.visible);
         nameField.shouldBe(Condition.visible);
         emailField.shouldBe(Condition.visible);
     }
 
     @Step("Logout user")
-    public void logoutUser() {
+    public void checkLogoutUser() {
         logoutButton.shouldBe(Condition.visible).click();
+        // проверка, что кнопки Профиля и Выхода не отображаются
         profileButton.shouldBe(Condition.disappear);
         logoutButton.shouldBe(Condition.disappear);
     }

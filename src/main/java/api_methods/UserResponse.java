@@ -1,4 +1,4 @@
-package apiMethods;
+package api_methods;
 
 public class UserResponse {
     private String email;

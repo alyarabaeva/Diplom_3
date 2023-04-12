@@ -1,13 +1,12 @@
-import apiMethods.User;
-import apiMethods.UserStep;
-import com.codeborne.selenide.Configuration;
+import api_methods.User;
+import api_methods.UserStep;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pageObjects.LoginPage;
-import pageObjects.ProfilePage;
+import page_objects.LoginPage;
+import page_objects.ProfilePage;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,17 +16,20 @@ public class LogoutTest {
 
     @Before
     public void setUp() throws JsonProcessingException {
+        System.setProperty("webdriver.chrome.driver", "/Users/ayarabaeva/yandexdriver");
+        System.setProperty("selenide.browser", "Chrome");
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
         userStep.createUser(user.getEmail(), user.getPassword(), user.getName());
     }
 
     @Test
     public void logoutUserTest() {
-        open("https://stellarburgers.nomoreparties.site/login", LoginPage.class)
-                .loginUser(user.getEmail(), user.getPassword());
+        LoginPage loginPage = open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
+        loginPage.checkLoginUser(user.getEmail(), user.getPassword());
         ProfilePage profilePage = new ProfilePage();
         profilePage.openProfileWithAuth();
-        profilePage.logoutUser();
+        profilePage.checkLogoutUser();
+        loginPage.checkOpenLoginPage();
     }
 
     @After

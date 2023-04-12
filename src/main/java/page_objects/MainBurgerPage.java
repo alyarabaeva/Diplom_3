@@ -1,5 +1,6 @@
-package pageObjects;
+package page_objects;
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
@@ -19,37 +20,49 @@ public class MainBurgerPage {
     private SelenideElement fillingsTitle = $(byXpath("//h2[text()='Начинки']"));
 
     @Step
-    public void openConstructorPage(){
+    public void checkOpenConstructorPage(){
         constructorButton.shouldBe(Condition.visible).click();
+        // Проверка, что тайтл главной страницы отобразился
         siteTitle.shouldBe(Condition.visible);
+        bunButton.shouldBe(Condition.visible);
+        saucesButton.shouldBe(Condition.visible);
+        fillingsButton.shouldBe(Condition.visible);
     }
 
     @Step
-    public void openConstructorPageFromLogo(){
+    public void checkOpenConstructorPageFromLogo(){
         stellarBurgersLogo.shouldBe(Condition.visible).click();
+        // Проверка, что тайтл главной страницы отобразился
         siteTitle.shouldBe(Condition.visible);
     }
 
 
     @Step("Open sauces section")
-    public void openSaucesSection(){
+    public void checkOpenSaucesSection(){
         siteTitle.shouldBe(Condition.visible);
         saucesButton.shouldBe(Condition.visible).click();
+        // проверка что название тайтл Соусы отобразилось
         saucesTitle.shouldBe(Condition.visible);
     }
 
     @Step("Open fillings section")
-    public void openFillingsSection(){
+    public void checkOpenFillingsSection(){
         siteTitle.shouldBe(Condition.visible);
+        fillingsButton.shouldBe(Condition.visible).click();
+        // проверка что название тайтл Начинки отобразилось
+        fillingsTitle.shouldBe(Condition.visible);
+    }
+    @Step("Transition to fillings section")
+    public void transitionToFillings(){
         fillingsButton.shouldBe(Condition.visible).click();
         fillingsTitle.shouldBe(Condition.visible);
     }
 
     @Step("Open buns section")
-    public void openBunsSection(){
+    public void checkOpenBunsSection(){
         siteTitle.shouldBe(Condition.visible);
-        saucesButton.shouldBe(Condition.visible).click();
         bunButton.shouldBe(Condition.visible).click();
+        // проверка что название тайтл Булки отобразилось
         bunTitle.shouldBe(Condition.visible);
     }
 }

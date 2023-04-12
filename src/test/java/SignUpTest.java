@@ -1,12 +1,11 @@
-import apiMethods.UserStep;
-import com.codeborne.selenide.Configuration;
+import api_methods.UserStep;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pageObjects.SignUpPage;
-import apiMethods.User;
+import page_objects.SignUpPage;
+import api_methods.User;
 
 import static com.codeborne.selenide.Selenide.open;
 
@@ -16,6 +15,8 @@ public class SignUpTest {
 
     @Before
     public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/Users/ayarabaeva/yandexdriver");
+        System.setProperty("selenide.browser", "Chrome");
         RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
     }
 
@@ -23,14 +24,14 @@ public class SignUpTest {
     public void registrationPositiveTest() {
         SignUpPage signUpPage =
                 open("https://stellarburgers.nomoreparties.site/register", SignUpPage.class);
-        signUpPage.createUser(user.getName(), user.getEmail(), user.getPassword());
+        signUpPage.checkUserCreation(user.getName(), user.getEmail(), user.getPassword());
     }
 
     @Test
     public void registrationIncorrectPasswordTest() {
         SignUpPage signUpPage =
                 open("https://stellarburgers.nomoreparties.site/register", SignUpPage.class);
-        signUpPage.createUserWithIncorrectPassword("user1", "user1@yandex.ru", "1234");
+        signUpPage.checkUserCreationWithIncorrectPassword("user1", "user1@yandex.ru", "1234");
     }
 
     @After

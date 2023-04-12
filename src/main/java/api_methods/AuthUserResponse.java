@@ -1,4 +1,4 @@
-package apiMethods;
+package api_methods;
 
 public class AuthUserResponse {
     private String accessToken;
