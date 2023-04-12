@@ -8,6 +8,7 @@ import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class MainBurgerPage {
+    public static final String PROD_URI = "https://stellarburgers.nomoreparties.site";
     private SelenideElement profile = $(byLinkText("Личный Кабинет"));
     private SelenideElement stellarBurgersLogo = $(byClassName("AppHeader_header__logo__2D0X2"));
     private SelenideElement constructorButton = $(byXpath("//a[@href='/']/p[text()='Конструктор']"));

@@ -8,6 +8,7 @@ import page_objects.SignUpPage;
 import api_methods.User;
 
 import static com.codeborne.selenide.Selenide.open;
+import static page_objects.MainBurgerPage.PROD_URI;
 
 public class SignUpTest {
     UserStep userStep = new UserStep();
@@ -17,20 +18,20 @@ public class SignUpTest {
     public void setUp() {
         System.setProperty("webdriver.chrome.driver", "/Users/ayarabaeva/yandexdriver");
         System.setProperty("selenide.browser", "Chrome");
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = PROD_URI;
     }
 
     @Test
     public void registrationPositiveTest() {
         SignUpPage signUpPage =
-                open("https://stellarburgers.nomoreparties.site/register", SignUpPage.class);
+                open(PROD_URI + "/register", SignUpPage.class);
         signUpPage.checkUserCreation(user.getName(), user.getEmail(), user.getPassword());
     }
 
     @Test
     public void registrationIncorrectPasswordTest() {
         SignUpPage signUpPage =
-                open("https://stellarburgers.nomoreparties.site/register", SignUpPage.class);
+                open(PROD_URI + "/register", SignUpPage.class);
         signUpPage.checkUserCreationWithIncorrectPassword("user1", "user1@yandex.ru", "1234");
     }
 

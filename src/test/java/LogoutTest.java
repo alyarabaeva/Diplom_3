@@ -9,6 +9,7 @@ import page_objects.LoginPage;
 import page_objects.ProfilePage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static page_objects.MainBurgerPage.PROD_URI;
 
 public class LogoutTest {
     UserStep userStep = new UserStep();
@@ -18,13 +19,13 @@ public class LogoutTest {
     public void setUp() throws JsonProcessingException {
         System.setProperty("webdriver.chrome.driver", "/Users/ayarabaeva/yandexdriver");
         System.setProperty("selenide.browser", "Chrome");
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+        RestAssured.baseURI = PROD_URI;
         userStep.createUser(user.getEmail(), user.getPassword(), user.getName());
     }
 
     @Test
     public void logoutUserTest() {
-        LoginPage loginPage = open("https://stellarburgers.nomoreparties.site/login", LoginPage.class);
+        LoginPage loginPage = open(PROD_URI + "/login", LoginPage.class);
         loginPage.checkLoginUser(user.getEmail(), user.getPassword());
         ProfilePage profilePage = new ProfilePage();
         profilePage.openProfileWithAuth();

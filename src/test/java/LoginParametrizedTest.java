@@ -13,6 +13,7 @@ import page_objects.ProfilePage;
 import page_objects.SignUpPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static page_objects.MainBurgerPage.PROD_URI;
 
 @RunWith(Parameterized.class)
 public class LoginParametrizedTest {
@@ -33,17 +34,18 @@ public class LoginParametrizedTest {
     public void setUp() throws JsonProcessingException {
         System.setProperty("webdriver.chrome.driver", "/Users/ayarabaeva/yandexdriver");
         System.setProperty("selenide.browser", "Chrome");
-        RestAssured.baseURI = "https://stellarburgers.nomoreparties.site";
+
+        RestAssured.baseURI = PROD_URI;
         userStep.createUser(user.getEmail(), user.getPassword(), user.getName());
     }
 
     @Parameterized.Parameters
     public static Object[][] enterData() {
         return new Object[][]{
-                {loginPage.loginAccountButton, "https://stellarburgers.nomoreparties.site/"},
-                {loginPage.profile, "https://stellarburgers.nomoreparties.site/"},
-                {signUpPage.loginButton, "https://stellarburgers.nomoreparties.site/register"},
-                {loginPage.loginForgerPasswordButton, "https://stellarburgers.nomoreparties.site/forgot-password"},
+                {loginPage.loginAccountButton, PROD_URI},
+                {loginPage.profile, PROD_URI},
+                {signUpPage.loginButton, PROD_URI + "/register"},
+                {loginPage.loginForgerPasswordButton, PROD_URI + "/forgot-password"},
         };
     }
 

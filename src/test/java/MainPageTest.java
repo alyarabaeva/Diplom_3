@@ -4,6 +4,7 @@ import page_objects.LoginPage;
 import page_objects.MainBurgerPage;
 
 import static com.codeborne.selenide.Selenide.open;
+import static page_objects.MainBurgerPage.PROD_URI;
 
 public class MainPageTest {
     @Before
@@ -14,25 +15,25 @@ public class MainPageTest {
 
     @Test
     public void transitionToProfileTest() {
-        LoginPage loginPage = open("https://stellarburgers.nomoreparties.site", LoginPage.class);
+        LoginPage loginPage = open(PROD_URI, LoginPage.class);
         loginPage.openProfileWithoutAuth();
     }
 
     @Test
     public void transitionToConstructorTest() {
-        MainBurgerPage mainBurgerPage = open("https://stellarburgers.nomoreparties.site/login", MainBurgerPage.class);
+        MainBurgerPage mainBurgerPage = open(PROD_URI + "/login", MainBurgerPage.class);
         mainBurgerPage.checkOpenConstructorPage();
     }
 
     @Test
     public void transitionToConstructorFromLogoTest() {
-        MainBurgerPage mainBurgerPage = open("https://stellarburgers.nomoreparties.site/login", MainBurgerPage.class);
+        MainBurgerPage mainBurgerPage = open(PROD_URI + "/login", MainBurgerPage.class);
         mainBurgerPage.checkOpenConstructorPageFromLogo();
     }
 
     @Test
     public void openBunsSectionTest() {
-        MainBurgerPage mainBurgerPage = open("https://stellarburgers.nomoreparties.site/login", MainBurgerPage.class);
+        MainBurgerPage mainBurgerPage = open(PROD_URI + "/login", MainBurgerPage.class);
         mainBurgerPage.checkOpenConstructorPage();
         mainBurgerPage.transitionToFillings();
         mainBurgerPage.checkOpenBunsSection();
@@ -40,12 +41,12 @@ public class MainPageTest {
 
     @Test
     public void openSaucesSectionTest() {
-        open("https://stellarburgers.nomoreparties.site", MainBurgerPage.class).checkOpenSaucesSection();
+        open(PROD_URI, MainBurgerPage.class).checkOpenSaucesSection();
     }
 
     @Test
     public void openFillingsSectionTest() {
-        open("https://stellarburgers.nomoreparties.site", MainBurgerPage.class).checkOpenFillingsSection();
+        open(PROD_URI, MainBurgerPage.class).checkOpenFillingsSection();
     }
 
 }
