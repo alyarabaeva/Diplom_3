@@ -25,6 +25,7 @@ public class ProfilePage {
         profileButton.shouldBe(Condition.visible);
         nameField.shouldBe(Condition.visible);
         emailField.shouldBe(Condition.visible);
+        logoutButton.shouldBe(Condition.visible);
     }
 
     @Step("Logout user")
