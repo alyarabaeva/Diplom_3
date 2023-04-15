@@ -1,5 +1,6 @@
 import api_methods.User;
 import api_methods.UserStep;
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.internal.shadowed.jackson.core.JsonProcessingException;
 import io.restassured.RestAssured;
 import org.junit.After;
@@ -39,5 +40,10 @@ public class LogoutTest {
         if (token != null) {
             userStep.deleteUser(token).then().statusCode(202);
         }
+    }
+
+    @After
+    public void closeBrowser(){
+        Selenide.closeWebDriver();
     }
 }

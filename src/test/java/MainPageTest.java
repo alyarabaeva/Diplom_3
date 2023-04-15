@@ -1,3 +1,5 @@
+import com.codeborne.selenide.Selenide;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import page_objects.LoginPage;
@@ -33,10 +35,9 @@ public class MainPageTest {
 
     @Test
     public void openBunsSectionTest() {
-        MainBurgerPage mainBurgerPage = open(PROD_URI + "/login", MainBurgerPage.class);
-        mainBurgerPage.checkOpenConstructorPage();
-        mainBurgerPage.transitionToFillings();
-        mainBurgerPage.checkOpenBunsSection();
+        open(PROD_URI, MainBurgerPage.class)
+                .transitionToFillings()
+                .checkOpenBunsSection();
     }
 
     @Test
@@ -49,4 +50,8 @@ public class MainPageTest {
         open(PROD_URI, MainBurgerPage.class).checkOpenFillingsSection();
     }
 
+    @After
+    public void closeBrowser() {
+        Selenide.closeWebDriver();
+    }
 }
